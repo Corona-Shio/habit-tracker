@@ -171,7 +171,6 @@ export default function App() {
                 weekDates={weekDates}
                 activeHabits={activeHabits}
                 records={state.records}
-                habitProgressById={habitProgressById}
                 overallProgress={overallProgress}
                 displayedWeekLabel={displayedWeekLabel}
                 progressTitle={weekProgressRange.title}

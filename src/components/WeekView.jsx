@@ -5,7 +5,6 @@ export default function WeekView({
   weekDates,
   activeHabits,
   records,
-  habitProgressById,
   overallProgress,
   displayedWeekLabel,
   progressTitle,
@@ -59,7 +58,6 @@ export default function WeekView({
               habit={habit}
               weekDates={weekDates}
               records={records}
-              progress={habitProgressById[habit.id] ?? { numerator: 0, denominator: 0, percent: 0 }}
               onToggleStatus={onToggleStatus}
             />
           ))

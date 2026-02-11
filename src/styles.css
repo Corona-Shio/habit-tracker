@@ -258,13 +258,6 @@ button:hover {
   background: var(--md-surface);
 }
 
-.habit-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
 .habit-title-wrap {
   display: inline-flex;
   align-items: center;
@@ -283,21 +276,6 @@ button:hover {
   border-radius: 50%;
   display: inline-block;
   flex-shrink: 0;
-}
-
-.habit-progress-meta {
-  text-align: right;
-  display: grid;
-  gap: 2px;
-}
-
-.habit-progress-meta strong {
-  font-size: 0.95rem;
-}
-
-.habit-progress-meta span {
-  font-size: 0.75rem;
-  color: var(--md-muted);
 }
 
 .status-row {
