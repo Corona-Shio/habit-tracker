@@ -7,7 +7,10 @@ export default function MonthView({
   selectedHabitId,
   onSelectHabit,
   records,
-  onToggleStatus
+  onToggleStatus,
+  onPreviousMonth,
+  onNextMonth,
+  onCurrentMonth
 }) {
   const yearLabel = `${monthCursor.getFullYear()}年`;
   const monthLabel = `${String(monthCursor.getMonth() + 1).padStart(2, "0")}月`;
@@ -34,6 +37,18 @@ export default function MonthView({
           ))}
         </div>
       ) : null}
+
+      <div className="range-actions month-range-actions" aria-label="月移動">
+        <button type="button" onClick={onPreviousMonth}>
+          前月
+        </button>
+        <button type="button" onClick={onCurrentMonth}>
+          今月
+        </button>
+        <button type="button" onClick={onNextMonth}>
+          次月
+        </button>
+      </div>
 
       <div className="period-label-stack" aria-label="表示中の年月">
         <span className="period-year">{yearLabel}</span>

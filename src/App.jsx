@@ -148,11 +148,11 @@ export default function App() {
                   <button type="button" onClick={() => setWeekCursor((prev) => addDays(prev, -7))}>
                     前週
                   </button>
-                  <button type="button" onClick={() => setWeekCursor((prev) => addDays(prev, 7))}>
-                    次週
-                  </button>
                   <button type="button" onClick={() => setWeekCursor(new Date())}>
                     今週
+                  </button>
+                  <button type="button" onClick={() => setWeekCursor((prev) => addDays(prev, 7))}>
+                    次週
                   </button>
                 </div>
               </div>
@@ -165,36 +165,20 @@ export default function App() {
               />
             </>
           ) : (
-            <>
-              <div className="range-toolbar">
-                <div className="range-actions">
-                  <button type="button" onClick={() => setMonthCursor((prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1))}>
-                    前月
-                  </button>
-                  <button type="button" onClick={() => setMonthCursor((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1))}>
-                    次月
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const current = new Date();
-                      setMonthCursor(new Date(current.getFullYear(), current.getMonth(), 1));
-                    }}
-                  >
-                    今月
-                  </button>
-                </div>
-              </div>
-
-              <MonthView
-                monthCursor={monthCursor}
-                activeHabits={activeHabits}
-                selectedHabitId={selectedMonthHabitId}
-                onSelectHabit={setSelectedMonthHabitId}
-                records={state.records}
-                onToggleStatus={actions.cycleHabitStatus}
-              />
-            </>
+            <MonthView
+              monthCursor={monthCursor}
+              activeHabits={activeHabits}
+              selectedHabitId={selectedMonthHabitId}
+              onSelectHabit={setSelectedMonthHabitId}
+              records={state.records}
+              onToggleStatus={actions.cycleHabitStatus}
+              onPreviousMonth={() => setMonthCursor((prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1))}
+              onNextMonth={() => setMonthCursor((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1))}
+              onCurrentMonth={() => {
+                const current = new Date();
+                setMonthCursor(new Date(current.getFullYear(), current.getMonth(), 1));
+              }}
+            />
           )}
         </section>
 

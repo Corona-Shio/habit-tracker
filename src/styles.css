@@ -145,6 +145,10 @@ button:hover {
   gap: 8px;
 }
 
+.range-actions button {
+  min-height: 42px;
+}
+
 .range-toolbar strong {
   font-size: 0.95rem;
   white-space: nowrap;
@@ -367,6 +371,11 @@ button:hover {
   border-color: color-mix(in srgb, var(--md-primary) 40%, var(--md-line));
   background: var(--md-primary-soft);
   color: var(--md-primary);
+}
+
+.month-range-actions {
+  margin: 0 0 12px;
+  width: 100%;
 }
 
 .month-selected-summary {
@@ -940,6 +949,10 @@ button:hover {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .range-actions button {
+    min-height: 46px;
   }
 
   .panel-header {
