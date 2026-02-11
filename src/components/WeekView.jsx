@@ -1,39 +1,33 @@
 import HabitCard from "./HabitCard";
 import { WEEKDAY_LABELS_SHORT, toDateKey } from "../utils/date";
 
+function getWeekPeriodLabels(weekDates) {
+  const start = weekDates[0];
+  const end = weekDates[6];
+  const startYear = `${start.getFullYear()}年`;
+  const endYear = `${end.getFullYear()}年`;
+  const startMonth = `${String(start.getMonth() + 1).padStart(2, "0")}月`;
+  const endMonth = `${String(end.getMonth() + 1).padStart(2, "0")}月`;
+
+  return {
+    year: startYear === endYear ? startYear : `${startYear} - ${endYear}`,
+    month: startMonth === endMonth ? startMonth : `${startMonth} - ${endMonth}`
+  };
+}
+
 export default function WeekView({
   weekDates,
   activeHabits,
   records,
-  overallProgress,
-  displayedWeekLabel,
-  progressTitle,
-  progressRangeLabel,
   onToggleStatus
 }) {
+  const periodLabels = getWeekPeriodLabels(weekDates);
+
   return (
     <section className="view-panel" aria-label="週間ビュー">
-      <div className="panel-header">
-        <div>
-          <h2>週間ビュー</h2>
-          <p>{displayedWeekLabel}</p>
-        </div>
-        <div className="overall-progress-card">
-          <span className="overall-label">{progressTitle}</span>
-          <strong>{overallProgress.percent}%</strong>
-          <span className="overall-sub">
-            {progressRangeLabel} / スキップは集計対象外
-          </span>
-          <div
-            className="linear-progress"
-            role="progressbar"
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-valuenow={overallProgress.percent}
-          >
-            <div className="linear-progress-fill" style={{ width: `${overallProgress.percent}%` }} />
-          </div>
-        </div>
+      <div className="period-label-stack" aria-label="表示中の年月">
+        <span className="period-year">{periodLabels.year}</span>
+        <span className="period-month">{periodLabels.month}</span>
       </div>
 
       <div className="week-head-row" aria-hidden="true">

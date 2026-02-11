@@ -72,5 +72,5 @@ export function formatDateRange(startDate, endDate) {
 }
 
 export function formatMonthLabel(baseDate) {
-  return `${baseDate.getFullYear()}年${String(baseDate.getMonth() + 1).padStart(2, "0")}月`;
+  return `${baseDate.getFullYear()}年\u2009${String(baseDate.getMonth() + 1).padStart(2, "0")}月`;
 }

@@ -154,6 +154,22 @@ button:hover {
   padding: 16px;
 }
 
+.period-label-stack {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+.period-year,
+.period-month {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--md-text);
+  line-height: 1.2;
+}
+
 .panel-header {
   display: flex;
   justify-content: space-between;
@@ -333,11 +349,6 @@ button:hover {
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-}
-
-.month-nav strong {
-  min-width: 120px;
-  text-align: center;
 }
 
 .month-habit-selector {

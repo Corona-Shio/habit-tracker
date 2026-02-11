@@ -1,5 +1,5 @@
 import { STATUS } from "../constants/status";
-import { WEEKDAY_LABELS_SHORT, formatMonthLabel, getMonthGrid, toDateKey } from "../utils/date";
+import { WEEKDAY_LABELS_SHORT, getMonthGrid, toDateKey } from "../utils/date";
 
 export default function MonthView({
   monthCursor,
@@ -9,11 +9,10 @@ export default function MonthView({
   records,
   onMoveMonth,
   onResetMonth,
-  onToggleStatus,
-  selectedHabitProgress,
-  progressRangeLabel
+  onToggleStatus
 }) {
-  const monthLabel = formatMonthLabel(monthCursor);
+  const yearLabel = `${monthCursor.getFullYear()}年`;
+  const monthLabel = `${String(monthCursor.getMonth() + 1).padStart(2, "0")}月`;
   const grid = getMonthGrid(monthCursor);
   const currentMonth = monthCursor.getMonth();
   const selectedHabit = activeHabits.find((habit) => habit.id === selectedHabitId) ?? null;
@@ -21,15 +20,10 @@ export default function MonthView({
   return (
     <section className="view-panel" aria-label="月間ビュー">
       <div className="panel-header month-header">
-        <div>
-          <h2>月間ビュー</h2>
-          <p>習慣を選んで、日付ごとに状態を記録</p>
-        </div>
         <div className="month-nav">
           <button type="button" onClick={() => onMoveMonth(-1)}>
             前月
           </button>
-          <strong>{monthLabel}</strong>
           <button type="button" onClick={() => onMoveMonth(1)}>
             次月
           </button>
@@ -57,17 +51,10 @@ export default function MonthView({
         </div>
       ) : null}
 
-      {selectedHabit ? (
-        <div className="month-selected-summary">
-          <div className="habit-title-wrap">
-            <span className="habit-color-dot" style={{ backgroundColor: selectedHabit.color }} aria-hidden="true" />
-            <strong>{selectedHabit.name}</strong>
-          </div>
-          <span>
-            達成度: {selectedHabitProgress.percent}% ({progressRangeLabel})
-          </span>
-        </div>
-      ) : null}
+      <div className="period-label-stack" aria-label="表示中の年月">
+        <span className="period-year">{yearLabel}</span>
+        <span className="period-month">{monthLabel}</span>
+      </div>
 
       <div className="calendar-wrap">
         <div className="calendar-week-head" aria-hidden="true">
@@ -102,8 +89,6 @@ export default function MonthView({
           })}
         </div>
       </div>
-
-      <p className="help-text">記録順: 未達成 → 半分達成 → 達成 → スキップ。スキップは集計対象外です。</p>
     </section>
   );
 }

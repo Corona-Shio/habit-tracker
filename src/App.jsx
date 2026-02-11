@@ -12,7 +12,7 @@ import {
   startOfSundayWeek,
   toDateKey
 } from "./utils/date";
-import { calculateHabitProgress, calculateOverallProgress } from "./utils/progress";
+import { calculateHabitProgress } from "./utils/progress";
 
 export default function App() {
   const { state, saveError, activeHabits, archivedHabits, actions } = useLocalStorageStore();
@@ -45,7 +45,6 @@ export default function App() {
   }, [activeHabits, selectedMonthHabitId]);
 
   const weekDates = useMemo(() => getWeekDates(weekCursor), [weekCursor]);
-  const displayedWeekLabel = useMemo(() => formatDateRange(weekDates[0], weekDates[6]), [weekDates]);
 
   const today = new Date();
   const todayOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -89,14 +88,6 @@ export default function App() {
       map[habit.id] = calculateHabitProgress(state.records, habit.id, activeRangeKeys);
     }
     return map;
-  }, [activeHabits, state.records, activeRangeKeys]);
-
-  const overallProgress = useMemo(() => {
-    return calculateOverallProgress(
-      state.records,
-      activeHabits.map((habit) => habit.id),
-      activeRangeKeys
-    );
   }, [activeHabits, state.records, activeRangeKeys]);
 
   function openAddDialog() {
@@ -164,17 +155,12 @@ export default function App() {
                     今週
                   </button>
                 </div>
-                <strong>{displayedWeekLabel}</strong>
               </div>
 
               <WeekView
                 weekDates={weekDates}
                 activeHabits={activeHabits}
                 records={state.records}
-                overallProgress={overallProgress}
-                displayedWeekLabel={displayedWeekLabel}
-                progressTitle={weekProgressRange.title}
-                progressRangeLabel={weekProgressRange.label}
                 onToggleStatus={actions.cycleHabitStatus}
               />
             </>
@@ -193,12 +179,6 @@ export default function App() {
                 setMonthCursor(new Date(current.getFullYear(), current.getMonth(), 1));
               }}
               onToggleStatus={actions.cycleHabitStatus}
-              selectedHabitProgress={
-                selectedMonthHabitId
-                  ? habitProgressById[selectedMonthHabitId] ?? { numerator: 0, denominator: 0, percent: 0 }
-                  : { numerator: 0, denominator: 0, percent: 0 }
-              }
-              progressRangeLabel={monthProgressRange.label}
             />
           )}
         </section>
