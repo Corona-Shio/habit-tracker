@@ -88,19 +88,15 @@ export default function MonthView({
               <button
                 key={dateKey}
                 type="button"
-                className={`calendar-day ${isCurrentMonth ? "" : "outside"}`.trim()}
+                className={`calendar-day status-${status} ${isCurrentMonth ? "" : "outside"}`.trim()}
                 onClick={() => selectedHabit && onToggleStatus(selectedHabit.id, dateKey)}
                 aria-label={selectedHabit ? `${selectedHabit.name} ${dateKey} の状態を変更` : `${dateKey}`}
                 disabled={!selectedHabit}
+                style={{ "--habit-color": selectedHabit?.color ?? "#8d9aa9" }}
               >
                 <div className="calendar-day-top">
                   <span>{date.getDate()}</span>
                 </div>
-                <span
-                  className={`month-status-marker status-${status}`}
-                  style={{ "--habit-color": selectedHabit?.color ?? "#8d9aa9" }}
-                  aria-hidden="true"
-                />
               </button>
             );
           })}

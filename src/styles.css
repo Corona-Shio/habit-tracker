@@ -418,8 +418,10 @@ button:hover {
   padding: 8px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 6px;
+  text-align: left;
+  transition: filter 120ms ease;
 }
 
 .calendar-day:nth-child(7n) {
@@ -427,8 +429,39 @@ button:hover {
 }
 
 .calendar-day.outside {
-  background: #f6f8fc;
   color: #9ea7b3;
+}
+
+.calendar-day.outside.status-none {
+  background: #f6f8fc;
+}
+
+.calendar-day.status-none {
+  background: var(--md-surface);
+}
+
+.calendar-day.status-half {
+  border-color: color-mix(in srgb, var(--habit-color) 36%, var(--md-line));
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      color-mix(in srgb, var(--habit-color) 72%, transparent) 0 5px,
+      transparent 2px 10px
+    ),
+    color-mix(in srgb, var(--habit-color) 16%, var(--md-surface));
+}
+
+.calendar-day.status-done {
+  border-color: color-mix(in srgb, var(--habit-color) 58%, var(--md-line));
+  background: var(--habit-color);
+  color: #ffffff;
+}
+
+.calendar-day.status-skip {
+  border-color: color-mix(in srgb, var(--habit-color) 38%, var(--md-line));
+  --skip-stroke: color-mix(in srgb, var(--habit-color) 68%, #ffffff);
+  --skip-soft: color-mix(in srgb, var(--habit-color) 52%, transparent);
+  background: color-mix(in srgb, var(--habit-color) 16%, var(--md-surface));
 }
 
 .calendar-day-top {
@@ -439,43 +472,24 @@ button:hover {
   font-weight: 500;
 }
 
-.month-status-marker {
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
-  border: 1px solid #8d9aa9;
-  display: inline-block;
-  margin-left: auto;
+.calendar-day-top span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  background: color-mix(in srgb, var(--md-surface) 88%, #ffffff);
 }
 
-.month-status-marker.status-none {
-  background: transparent;
-}
-
-.month-status-marker.status-half {
-  border-color: color-mix(in srgb, var(--habit-color) 70%, #8d9aa9);
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      color-mix(in srgb, var(--habit-color) 82%, transparent) 0 3.2px,
-      transparent 1.6px 7.8px
-    );
-}
-
-.month-status-marker.status-done {
-  border-color: var(--habit-color);
-  background: var(--habit-color);
-}
-
-.month-status-marker.status-skip {
-  border-color: color-mix(in srgb, var(--habit-color) 55%, #8d9aa9);
-  --skip-stroke: color-mix(in srgb, var(--habit-color) 68%, #ffffff);
-  --skip-soft: color-mix(in srgb, var(--habit-color) 52%, transparent);
-  background: transparent;
+.calendar-day.status-done .calendar-day-top span {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
 }
 
 .app-shell[data-skip-style="cross-thin"] .status-cell.status-skip,
-.app-shell[data-skip-style="cross-thin"] .month-status-marker.status-skip,
+.app-shell[data-skip-style="cross-thin"] .calendar-day.status-skip,
 .skip-style-option[data-style="cross-thin"] .skip-preview-cell {
   background:
     linear-gradient(
@@ -494,7 +508,7 @@ button:hover {
 }
 
 .app-shell[data-skip-style="cross-medium"] .status-cell.status-skip,
-.app-shell[data-skip-style="cross-medium"] .month-status-marker.status-skip,
+.app-shell[data-skip-style="cross-medium"] .calendar-day.status-skip,
 .skip-style-option[data-style="cross-medium"] .skip-preview-cell {
   background:
     linear-gradient(
@@ -513,7 +527,7 @@ button:hover {
 }
 
 .app-shell[data-skip-style="cross-bold"] .status-cell.status-skip,
-.app-shell[data-skip-style="cross-bold"] .month-status-marker.status-skip,
+.app-shell[data-skip-style="cross-bold"] .calendar-day.status-skip,
 .skip-style-option[data-style="cross-bold"] .skip-preview-cell {
   background:
     linear-gradient(
@@ -532,7 +546,7 @@ button:hover {
 }
 
 .app-shell[data-skip-style="cross-double"] .status-cell.status-skip,
-.app-shell[data-skip-style="cross-double"] .month-status-marker.status-skip,
+.app-shell[data-skip-style="cross-double"] .calendar-day.status-skip,
 .skip-style-option[data-style="cross-double"] .skip-preview-cell {
   background:
     linear-gradient(
@@ -563,7 +577,7 @@ button:hover {
 }
 
 .app-shell[data-skip-style="cross-outline"] .status-cell.status-skip,
-.app-shell[data-skip-style="cross-outline"] .month-status-marker.status-skip,
+.app-shell[data-skip-style="cross-outline"] .calendar-day.status-skip,
 .skip-style-option[data-style="cross-outline"] .skip-preview-cell {
   background:
     linear-gradient(
@@ -593,12 +607,13 @@ button:hover {
     transparent;
 }
 
-.calendar-day:disabled {
-  cursor: not-allowed;
+.calendar-day.status-skip {
+  background-color: color-mix(in srgb, var(--habit-color) 16%, var(--md-surface));
 }
 
-.calendar-day:disabled .month-status-marker {
-  opacity: 0.4;
+.calendar-day:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
 }
 
 .help-text {
@@ -985,7 +1000,7 @@ button:hover {
   }
 
   .status-cell.status-skip,
-  .month-status-marker.status-skip {
+  .calendar-day.status-skip {
     --skip-stroke: color-mix(in srgb, var(--habit-color) 82%, #000000);
     --skip-soft: color-mix(in srgb, var(--habit-color) 62%, transparent);
   }
