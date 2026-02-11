@@ -246,16 +246,13 @@ button:hover {
 
 .habit-card-list {
   display: grid;
-  gap: 8px;
+  gap: 12px;
 }
 
 .habit-card {
-  border: 1px solid var(--md-line);
-  border-radius: var(--radius-md);
-  padding: 12px;
+  padding: 6px 0;
   display: grid;
-  gap: 8px;
-  background: var(--md-surface);
+  gap: 6px;
 }
 
 .habit-title-wrap {
