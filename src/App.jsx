@@ -9,13 +9,12 @@ import {
   formatDateRange,
   getDateRangeKeys,
   getWeekDates,
-  startOfSundayWeek,
-  toDateKey
+  startOfSundayWeek
 } from "./utils/date";
 import { calculateHabitProgress } from "./utils/progress";
 
 export default function App() {
-  const { state, saveError, activeHabits, archivedHabits, actions } = useLocalStorageStore();
+  const { state, activeHabits, archivedHabits, actions } = useLocalStorageStore();
 
   const [view, setView] = useState("week");
   const [weekCursor, setWeekCursor] = useState(new Date());
@@ -183,9 +182,7 @@ export default function App() {
         </section>
 
         <section className="summary-panel" aria-label="達成度サマリー">
-          <h2>
-            習慣ごとの達成度（{activeProgressRange.title} / {activeProgressRange.label}）
-          </h2>
+          <h2>{activeProgressRange.title}（{activeProgressRange.label}）</h2>
           <p className="help-text">スキップは分母から除外して計算しています。</p>
           {activeHabits.length === 0 ? (
             <p className="empty-state">習慣を追加すると集計が表示されます。</p>
@@ -212,11 +209,6 @@ export default function App() {
           )}
         </section>
       </main>
-
-      <footer className="app-footer">
-        <span>{saveError ? "ローカル保存に失敗しました" : "変更は localStorage に保存されます"}</span>
-        <span>今日: {toDateKey(today)}</span>
-      </footer>
 
       <HabitManagerDialog
         open={isManagerOpen}
