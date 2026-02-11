@@ -255,14 +255,6 @@ button:hover {
   color: var(--md-muted);
 }
 
-.weekday.day-0 {
-  color: #b71c1c;
-}
-
-.weekday.day-6 {
-  color: #0d47a1;
-}
-
 .week-head-cell .date {
   font-size: 1rem;
   font-weight: 600;
@@ -309,8 +301,8 @@ button:hover {
   width: 100%;
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-sm);
-  border: 1px solid #8d9aa9;
-  background: transparent;
+  border: none;
+  background: var(--md-surface-2);
   position: relative;
   padding: 0;
 }
@@ -320,29 +312,27 @@ button:hover {
 }
 
 .status-cell.status-none {
-  background: transparent;
+  background: var(--md-surface-2);
 }
 
 .status-cell.status-half {
-  border-color: color-mix(in srgb, var(--habit-color) 70%, #8d9aa9);
   background:
     repeating-linear-gradient(
       -45deg,
       color-mix(in srgb, var(--habit-color) 82%, transparent) 0 4.2px,
       transparent 2px 10.2px
-    );
+    ),
+    color-mix(in srgb, var(--habit-color) 16%, var(--md-surface));
 }
 
 .status-cell.status-done {
-  border-color: var(--habit-color);
   background: var(--habit-color);
 }
 
 .status-cell.status-skip {
-  border-color: color-mix(in srgb, var(--habit-color) 55%, #8d9aa9);
   --skip-stroke: color-mix(in srgb, var(--habit-color) 68%, #ffffff);
   --skip-soft: color-mix(in srgb, var(--habit-color) 52%, transparent);
-  background: transparent;
+  background: color-mix(in srgb, var(--habit-color) 16%, var(--md-surface));
 }
 
 .month-habit-selector {
@@ -407,14 +397,6 @@ button:hover {
   font-size: 0.8rem;
   color: var(--md-muted);
   font-weight: 500;
-}
-
-.calendar-weekday.day-0 {
-  color: #b71c1c;
-}
-
-.calendar-weekday.day-6 {
-  color: #0d47a1;
 }
 
 .calendar-grid {
@@ -603,6 +585,10 @@ button:hover {
 }
 
 .calendar-day.status-skip {
+  background-color: color-mix(in srgb, var(--habit-color) 16%, var(--md-surface));
+}
+
+.app-shell[data-skip-style] .status-cell.status-skip {
   background-color: color-mix(in srgb, var(--habit-color) 16%, var(--md-surface));
 }
 
