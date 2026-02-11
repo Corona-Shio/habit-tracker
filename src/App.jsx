@@ -165,21 +165,36 @@ export default function App() {
               />
             </>
           ) : (
-            <MonthView
-              monthCursor={monthCursor}
-              activeHabits={activeHabits}
-              selectedHabitId={selectedMonthHabitId}
-              onSelectHabit={setSelectedMonthHabitId}
-              records={state.records}
-              onMoveMonth={(diff) => {
-                setMonthCursor((prev) => new Date(prev.getFullYear(), prev.getMonth() + diff, 1));
-              }}
-              onResetMonth={() => {
-                const current = new Date();
-                setMonthCursor(new Date(current.getFullYear(), current.getMonth(), 1));
-              }}
-              onToggleStatus={actions.cycleHabitStatus}
-            />
+            <>
+              <div className="range-toolbar">
+                <div className="range-actions">
+                  <button type="button" onClick={() => setMonthCursor((prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1))}>
+                    前月
+                  </button>
+                  <button type="button" onClick={() => setMonthCursor((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1))}>
+                    次月
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const current = new Date();
+                      setMonthCursor(new Date(current.getFullYear(), current.getMonth(), 1));
+                    }}
+                  >
+                    今月
+                  </button>
+                </div>
+              </div>
+
+              <MonthView
+                monthCursor={monthCursor}
+                activeHabits={activeHabits}
+                selectedHabitId={selectedMonthHabitId}
+                onSelectHabit={setSelectedMonthHabitId}
+                records={state.records}
+                onToggleStatus={actions.cycleHabitStatus}
+              />
+            </>
           )}
         </section>
 

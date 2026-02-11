@@ -7,8 +7,6 @@ export default function MonthView({
   selectedHabitId,
   onSelectHabit,
   records,
-  onMoveMonth,
-  onResetMonth,
   onToggleStatus
 }) {
   const yearLabel = `${monthCursor.getFullYear()}年`;
@@ -19,20 +17,6 @@ export default function MonthView({
 
   return (
     <section className="view-panel" aria-label="月間ビュー">
-      <div className="panel-header month-header">
-        <div className="month-nav">
-          <button type="button" onClick={() => onMoveMonth(-1)}>
-            前月
-          </button>
-          <button type="button" onClick={() => onMoveMonth(1)}>
-            次月
-          </button>
-          <button type="button" onClick={onResetMonth}>
-            今月
-          </button>
-        </div>
-      </div>
-
       {activeHabits.length === 0 ? <p className="empty-state">習慣がありません。管理から追加してください。</p> : null}
 
       {activeHabits.length > 0 ? (

@@ -341,17 +341,6 @@ button:hover {
   background: transparent;
 }
 
-.month-header {
-  align-items: center;
-}
-
-.month-nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
 .month-habit-selector {
   margin: 0 0 12px;
   display: flex;
