@@ -81,9 +81,7 @@ export default function MonthView({
                 disabled={!selectedHabit}
                 style={{ "--habit-color": selectedHabit?.color ?? "#8d9aa9" }}
               >
-                <div className="calendar-day-top">
-                  <span>{date.getDate()}</span>
-                </div>
+                <span className="calendar-day-date">{date.getDate()}</span>
               </button>
             );
           })}
