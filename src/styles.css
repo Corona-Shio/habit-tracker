@@ -429,11 +429,12 @@ button:hover {
 }
 
 .calendar-day.outside {
-  color: #9ea7b3;
+  color: color-mix(in srgb, var(--md-muted) 90%, var(--md-text));
+  background: color-mix(in srgb, var(--md-surface) 94%, var(--md-surface-2));
 }
 
 .calendar-day.outside.status-none {
-  background: #f6f8fc;
+  background: color-mix(in srgb, var(--md-surface) 94%, var(--md-surface-2));
 }
 
 .calendar-day.status-none {
